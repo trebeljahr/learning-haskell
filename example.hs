@@ -1,6 +1,7 @@
 main :: IO ()
 main = putStrLn "Hello, World"
 
+-- declarations of functions and values
 doubleMe x = x + x
 doubleUs x y = 2*x + 2*y
 betterDoubleUs x y = doubleMe x + doubleMe y
@@ -9,15 +10,20 @@ doubleSmallNumber' x = (if x > 100 then x else 2*x) + 1
 lostNumbers = [1, 2, 3, 4, 5]
 lostNumbersAndLostNumbers = lostNumbers ++ lostNumbers
 
+-- strings are lists?! 
 stringsAreLists = ["h","e"] ++ ["l","l","o"]
 a = stringsAreLists ++ ["w", "o", "r", "l", "d"]
 stringConcat = "hello" ++ " " ++ "world"
 getFirstElement x = x !! 0
 getFirstChar = getFirstElement
 getFirstChar' x = head x
-compareLists = [2, 3, 1] > [2, 2, 1]
-compareLists' = [2, 3, 1] > [2, 3]
-compareLists'' = [1, 2, 3] == [1, 2, 3]
+
+-- list comparisons 
+compareLists = [2, 3, 1] > [2, 2, 1] -- True
+compareLists' = [2, 3, 1] > [2, 3] -- True
+compareLists'' = [1, 2, 3] == [1, 2, 3] -- True
+
+-- some list operations
 getListWithoutHead x = tail x
 getLastElement x = last x
 getEverythingButTheLastElement x = init x
@@ -28,11 +34,19 @@ takeElementsFromList y x = take y x
 dropElementsFromList y x = drop y x
 equalToTrue = takeElementsFromList 2 [1, 2, 3] == [1, 2]
 equalToTrue' = dropElementsFromList 2 [1, 2, 3] == [3]
+
+-- Min, max functions 
 returnsTheMinimumIn x = minimum x
 returnsTheMaximumIn x = maximum x
+
+-- Sum and product 
 returnsTheSumOfElementsInList x = sum x
 returnsTheProductOfElementsInList x = product x
+
+-- Finding Elements in a list. 
 saysIfSomethingIsInAList list something = something `elem` list
+
+-- RANGES! Fun Stuff. 
 thisIsARange = [20..100]
 thisIsAnotherRange = [1..10]
 thisIsRangeCountingDown = [30, 29..10]
