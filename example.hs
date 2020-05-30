@@ -50,10 +50,6 @@ filterSetComprehension = [x*2 | x <- [1..10], x*2 >= 12]
 yeah = filterSetComprehension == [12,14,16,18,20]
 filterSetComprehension' = [x | x <- [50..100], x `mod` 7 == 3]
 yeah' = filterSetComprehension' == [52,59,66,73,80,87,94]
-fizzBuzz upper = [if x `mod` 15 == 0 then "Fizz Buzz"
-else if x `mod` 3 == 0 then "Fizz"
-else if x `mod` 5 == 0 then "Buzz"
-else show x | x <- [1..upper]]
 boomBang xs = [if x <  10 then "BOOM!" else "BANG!" | x <- xs, odd x]
 boomBangEvals = boomBang [7..13] == ["BOOM!","BOOM!","BANG!","BANG!"]
 permutator = [x++y | x <- ["a", "b", "c"], y <- ["d", "e", "f"]]
