@@ -42,6 +42,10 @@ isThisEven x
     | x `mod` 2 == 0 = "Yeah my man, this is even!"
     | otherwise = "Sry bro, but this is not even."
 
+myFunc :: a -> a 
+myFunc "a" = "b"
+myFunc n = "a"
+
 fibonacci :: (Integral a) => a -> a
 fibonacci 0 = 0
 fibonacci 1 = 1
