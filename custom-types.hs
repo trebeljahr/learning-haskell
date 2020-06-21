@@ -23,3 +23,14 @@ printPhylo (Animal {
     mainClass ++ ", of the order " ++ order ++ 
     ", the family " ++ family ++ " and the genus " ++ 
     genus ++ ".")
+
+data ThreeDVector a = ThreeDVector a a a deriving (Show)  
+  
+vectPlus :: (Num t) => ThreeDVector t -> ThreeDVector t -> ThreeDVector t  
+(ThreeDVector i j k) `vectPlus` (ThreeDVector l m n) = ThreeDVector (i+l) (j+m) (k+n)  
+  
+scalarMult :: (Num t) => ThreeDVector t -> t -> ThreeDVector t  
+(ThreeDVector i j k) `scalarMult` m = ThreeDVector (i*m) (j*m) (k*m)  
+  
+dotProduct :: (Num t) => ThreeDVector t -> ThreeDVector t -> t  
+(ThreeDVector i j k) `dotProduct` (ThreeDVector l m n) = i*l + j*m + k*n  
