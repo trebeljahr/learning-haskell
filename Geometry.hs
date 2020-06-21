@@ -42,3 +42,5 @@ circleCircumference r = 2 * pi * r
 
 rectangleArea :: Float -> Float -> Float  
 rectangleArea a b = a * b  
+
+ 
