@@ -1,3 +1,5 @@
+import qualified Data.Map as Map
+
 data Person = Person {firstName :: String  , lastName :: String, age :: Int, occupation :: Float, gender :: String} deriving (Show) 
 
 data Animal = Animal {mainClass :: String, name::String, order :: String, family :: String, genus :: String, species :: String} deriving (Show)
@@ -34,3 +36,33 @@ scalarMult :: (Num t) => ThreeDVector t -> t -> ThreeDVector t
   
 dotProduct :: (Num t) => ThreeDVector t -> ThreeDVector t -> t  
 (ThreeDVector i j k) `dotProduct` (ThreeDVector l m n) = i*l + j*m + k*n  
+
+data Month = January | February | March | April | Mai | June | July | August | September | October | November | December 
+             deriving (Eq, Ord, Show, Read, Bounded, Enum)
+
+-- January == February 
+-- False
+-- January == January 
+-- True
+-- March > April 
+-- False 
+-- June < December
+-- True 
+
+-- succ January 
+-- February
+
+allTheMonths = [January .. December]
+allTheMonths' = [minBound .. maxBound] :: [Month]
+
+type Name = String
+type Email = String
+type SuccessMessage = String
+
+persons = Map.fromList [("Rico", "mail@ricotrebeljahr.com")]
+
+sendEmailTo :: Name -> SuccessMessage  
+sendEmailTo name = 
+    if Map.lookup name persons == Nothing 
+    then "You do not know this person." 
+    else "Success"
