@@ -66,3 +66,111 @@ sendEmailTo name =
     if Map.lookup name persons == Nothing 
     then "You do not know this person." 
     else "Success"
+
+
+-- Locker Example 
+data LockerState = Taken | Free deriving (Show, Eq)
+
+type Code = String
+
+type LockerMap = Map.Map Int (LockerState, Code)
+
+lockerLookup :: Int -> LockerMap -> Either String Code 
+lockerLookup lockerNumber map = 
+    case Map.lookup lockerNumber map of 
+            Nothing -> Left $ "Locker number " ++ show lockerNumber ++ " doesn't exist!"
+            Just (state, code) -> if state /= Taken 
+                                    then Right $ "The locker has the code: " ++ code
+                                    else Left $ "Locker " ++ show lockerNumber ++ " is already taken"
+
+lockers :: LockerMap  
+lockers = Map.fromList   
+    [(100,(Taken,"ZD39I"))  
+    ,(101,(Free,"JAH3I"))  
+    ,(103,(Free,"IQSA9"))  
+    ,(105,(Free,"QOTSA"))  
+    ,(109,(Taken,"893JJ"))  
+    ,(110,(Taken,"99292"))  
+    ]  
+
+-- recursive type definition for a list.
+data List a = Empty | Cons a (List a) deriving (Show, Read, Eq, Ord)
+
+data List' a = Empty' | Cons' { listHead::a, listTail :: List' a} deriving (Show, Read, Eq, Ord)
+
+-- binary tree example 
+data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving (Show, Read, Eq, Ord)
+
+treeAdd :: (Ord a) => a -> Tree a -> Tree a 
+treeAdd elem EmptyTree = genNode elem 
+treeAdd elem (Node a left right)
+    | elem == a = Node elem left right
+    | elem < a = Node a (treeAdd elem left) right
+    | elem > a = Node a left (treeAdd elem right)
+
+genNode :: a -> Tree a 
+genNode elem = Node elem EmptyTree EmptyTree 
+
+treeLookup :: (Ord a) => a -> Tree a -> Bool 
+treeLookup elem EmptyTree = False 
+treeLookup elem (Node a left right)
+    | elem == a = True 
+    | elem < a = treeLookup elem left 
+    | elem > a = treeLookup elem right 
+
+-- quadtree example 
+data Point = Point Float Float deriving (Show, Read, Eq, Ord)
+type Width = Float 
+type Height = Float 
+data Boundary = Boundary Point Width Height deriving (Show, Read, Eq, Ord)
+data QuadTree a = EmptyQuadTree | QuadNode a Boundary (QuadTree a) (QuadTree a) (QuadTree a) (QuadTree a) deriving (Show, Read, Eq, Ord)
+
+middle :: Point -> Point -> Point 
+middle (Point x1 y1) (Point x2 y2) = Point ((x2 + x1) / 2) ((y2 + x1) / 2)
+
+northWest :: Boundary -> Boundary
+northWest (Boundary (Point x1 y1) w h) = 
+    let newPoint = Point x1 y1 
+    in Boundary (newPoint) (w/2) (h/2)
+
+northEast :: Boundary -> Boundary
+northEast (Boundary (Point x1 y1) w h) = 
+    let newPoint = Point (x1 + w/2) (y1)  
+    in Boundary (newPoint) (w/2) (h/2)
+
+southWest :: Boundary -> Boundary
+southWest (Boundary (Point x1 y1) w h) = 
+    let newPoint = Point x1 (y1 + h/2)
+    in Boundary (newPoint) (w/2) (h/2)
+
+southEast :: Boundary -> Boundary
+southEast (Boundary (Point x1 y1) w h) = 
+    let newPoint = Point (x1 + w/2) (y1 + h/2)
+    in Boundary (newPoint) (w/2) (h/2)
+ 
+
+-- between :: Int 
+-- quadInsert :: Int -> Int -> QuadTree data -> QuadTree data 
+-- quadInsert x y (EmptyQuadTree (Boundary x1 x2 y1 y2)) 
+--     | northEast 
+--     | northWest 
+--     | southEast
+--     | southWest
+--     where northEast = Boundary
+--           northWest = 
+--           southEast = 
+--           southWest = 
+-- quadInsert data boundary 
+--     | 
+--     | 
+--     | 
+
+quadNode :: a -> Boundary -> QuadTree a
+quadNode a boundary = QuadNode a boundary EmptyQuadTree EmptyQuadTree EmptyQuadTree EmptyQuadTree 
+
+-- quadLookup :: Int -> Int -> QuadTree data -> Bool 
+-- quadLookup x y EmptyQuadTree = False 
+-- quadLookup x y (QuadNode data x2 y2 (northeast northwest southeast southwest))
+--     | x == x2 && y = y2 
+--     | 
+--     | 
