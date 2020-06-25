@@ -1,4 +1,4 @@
-module Geometry  
+module ExampleModule  
 ( sphereVolume  
 , sphereArea  
 , cubeVolume  
