@@ -1,0 +1,7 @@
+This checks for palindromes.
+ABCCBA
+No palindrome. 
+dogaroo
+radar
+rotor
+madam
