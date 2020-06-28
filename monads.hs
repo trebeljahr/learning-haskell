@@ -70,3 +70,29 @@ epicDoStuff = do
     c <- Just 10
     d <- Just "!"
     Just (a ++ (show $ b + c) ++ d)
+
+poleWalkWithBirds :: Maybe Pole 
+poleWalkWithBirds = do 
+    start <- return (0,0)
+    first <- landLeft 2 start 
+    second <- landRight 4 first 
+    third <- landRight 4 second
+    landLeft 2 third 
+
+listOfTuples :: [(Int,Char)]  
+listOfTuples = do  
+    n <- [3,4,5]  
+    ch <- ['x','y','z']  
+    return (n,ch) 
+
+greetEveryone :: [String] -> [String]
+greetEveryone names = do
+    name <- names 
+    greet <- ["Hello "]
+    return (greet ++ name)
+-- greetEveryone ["Paul", "Ole", "Verena"]
+-- ==> ["Hello Paul", "Hello Ole", "Hello Verena"]
+
+-- list comprehensions are also just monads. wtf. 
+-- [ (n,ch) | n <- [3,4,5], ch <- ['x','y', 'z'] ] == listOfTuples
+-- ==> True
